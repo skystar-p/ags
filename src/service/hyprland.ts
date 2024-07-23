@@ -253,6 +253,20 @@ export class Hyprland extends Service {
         }
     }
 
+    private _updateActiveWorkspaceByName(name: string, notify = true) {
+        try {
+            const msg = await this.messageAsync('j/workspaces');
+            for (const ws of JSON.parse(msg) as Array<Workspace>) {
+                if (ws.name === name) {
+                    this._updateActiveWorkspace(ws.id, ws.name, notify);
+                    break;
+                }
+            }
+        } catch (error) {
+            logError(error);
+        }
+    }
+
     private async _syncWorkspaces(notify = true) {
         try {
             const msg = await this.messageAsync('j/workspaces');
@@ -295,6 +309,7 @@ export class Hyprland extends Service {
                     break;
                 case 'focusedmon':
                     await this._syncMonitors();
+                    this._updateActiveWorkspaceByName(argv[1]);
                     break;
 
                 case 'monitorremoved':
