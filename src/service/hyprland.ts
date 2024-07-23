@@ -253,7 +253,7 @@ export class Hyprland extends Service {
         }
     }
 
-    private _updateActiveWorkspaceByName(name: string, notify = true) {
+    private async _updateActiveWorkspaceByName(name: string, notify = true) {
         try {
             const msg = await this.messageAsync('j/workspaces');
             for (const ws of JSON.parse(msg) as Array<Workspace>) {
@@ -309,7 +309,7 @@ export class Hyprland extends Service {
                     break;
                 case 'focusedmon':
                     await this._syncMonitors();
-                    this._updateActiveWorkspaceByName(argv[1]);
+                    await this._updateActiveWorkspaceByName(argv[1]);
                     break;
 
                 case 'monitorremoved':
