@@ -1,18 +1,19 @@
-import { NotificationPopups } from "./notificationPopups.js"
+import { NotificationPopups } from "./notificationPopups.js";
 
-Utils.timeout(100, () => Utils.notify({
+Utils.timeout(100, () =>
+  Utils.notify({
     summary: "Notification Popup Example",
     iconName: "info-symbolic",
     body: "Lorem ipsum dolor sit amet, qui minim labore adipisicing "
-        + "minim sint cillum sint consectetur cupidatat.",
+      + "minim sint cillum sint consectetur cupidatat.",
     actions: {
-        "Cool": () => print("pressed Cool"),
+      "Cool": () => print("pressed Cool"),
     },
-}))
+  }));
 
 App.config({
-    style: App.configDir + "/style.css",
-    windows: [
-        NotificationPopups(),
-    ],
-})
+  style: App.configDir + "/style.css",
+  windows: [
+    NotificationPopups(),
+  ],
+});
